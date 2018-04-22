@@ -1,48 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>layui</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
-    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-</head>
 
-<body>
-<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo">
-    <li class="layui-nav-item layui-nav-itemed">
-        <a href="javascript:;">首页</a>
-        <dl class="layui-nav-child">
-            <dd><a href="javascript:;" target="hsgmain">论文公告</a></dd>
-            <dd><a href="javascript:;">关于软件</a></dd>
-        </dl>
-    </li>
-    <li class="layui-nav-item">
-        <a href="javascript:;">教师管理</a>
-        <dl class="layui-nav-child">
-            <dd><a href="teacherAdd.jsp" target="content-show">教师信息添加</a></dd>
-            <dd><a href="tacherQuery.jsp" target="content-show">教师信息查询</a></dd>
-            <dd><a href="">教师信息修改</a></dd>
-            <dd><a href="">教师信息删除</a></dd>
-        </dl>
-    </li>
-    <li class="layui-nav-item"><a href="">云市场</a></li>
-    <li class="layui-nav-item"><a href="">社区</a></li>
-</ul>
-<script src="layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script>
-    layui.use('element', function(){
-        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+	<head>
+		<meta charset="utf-8">
+		<title>layui</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="layui/css/layui.css" media="all">
+		<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+	</head>
 
-        //监听导航点击
-        element.on('nav(demo)', function(elem){
-            //console.log(elem)
-            //layer.msg(elem.text());
-        });
-    });
-</script>
-</body>
+	<body>
+		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo">
+			<li class="layui-nav-item layui-nav-itemed">
+				<a href="javascript:;">首页</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="javascript:;" target="hsgmain">论文公告</a>
+					</dd>
+					<dd>
+						<a href="javascript:;">关于软件</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="javascript:;">教师管理</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="teacherAdd.jsp" target="content-show">教师信息添加</a>
+					</dd>
+					<dd>
+						<a href="teacherQuery.jsp" target="content-show">教师信息查询</a>
+					</dd>
+					<dd>
+						<a href="">教师信息修改</a>
+					</dd>
+					<dd>
+						<a href="">教师信息删除</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a href="">云市场</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="">社区</a>
+			</li>
+		</ul>
+		<script src="layui/layui.js" charset="utf-8"></script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			layui.use('element', function() {
+				var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+				//监听导航点击
+				element.on('nav(demo)', function(elem) {
+					//console.log(elem)
+					//layer.msg(elem.text());
+				});
+			});
+		</script>
+	</body>
+
 </html>

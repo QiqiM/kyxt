@@ -24,7 +24,7 @@ import db.Db;
 /**
  * Servlet implementation class QyeryTeacher
  */
-@WebServlet("/QueryTeacher")
+@WebServlet(description = "查询教师", urlPatterns = { "/QueryTeacher" })
 public class QueryTeacher extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -42,6 +42,35 @@ public class QueryTeacher extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String methodname = request.getParameter("methodname");
+		if (methodname != null) {
+			switch (methodname) {
+			case "deletemulti":
+				deleteMulti(request, response);
+				break;
+			case "deletesingle":
+				deleteSingle(request, response);
+				break;
+			default:
+				queryList(request, response);
+			}
+
+		} else {
+			queryList(request, response);
+		}
+
+	}
+
+	private void queryList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
@@ -107,7 +136,6 @@ public class QueryTeacher extends HttpServlet {
 			rs.close();
 			ps.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -142,20 +170,83 @@ public class QueryTeacher extends HttpServlet {
 			db.getConnect().close();
 			out.print(json);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	private void deleteSingle(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		Db db = new Db();
+		String sql = "delete from teacher where empnum = ?";
+		int empnum = Integer.parseInt(request.getParameter("empnum"));
+		int row = 0;
+		PreparedStatement ps = db.getPs(sql);
+		try {
+			ps.setInt(1, empnum);
+			row = ps.executeUpdate();
+			if (row != 0) {
+				out.print("1");
+			} else {
+				out.print("0"); // 直接返回只能返回数字，否则要构建json数据
+			}
+			ps.close();
+			db.getConnect().close();
+			out.flush();
+			out.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteMulti(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		Db db = new Db();
+		String num = request.getParameter("empnums");
+		String a[] = num.split(";");
+		int[] arr = new int[a.length];
+		for (int i = 0; i < a.length; i++) {
+			arr[i] = Integer.parseInt(a[i]);
+		}
+
+		String sql = "delete from teacher where empnum = ?";
+		PreparedStatement ps = db.getPs(sql);
+		for (int j = 0; j < arr.length; j++) {
+			try {
+				ps.setInt(1, arr[j]);
+				ps.addBatch();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		int[] rows;
+		try {
+			rows = ps.executeBatch();
+			int row = rows.length;
+			ps.close();
+			db.getConnect().close();
+			if (row == arr.length) {
+				out.print("1");
+			} else {
+				out.print("0");
+			}
+			out.flush();
+			out.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
