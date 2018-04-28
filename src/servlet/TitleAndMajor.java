@@ -81,7 +81,7 @@ public class TitleAndMajor extends HttpServlet {
 		int majorid = 0, titleid = 0;
 		String majorname = request.getParameter("majorname");
 		String titlename = request.getParameter("titlename");
-		System.out.println(majorname);
+		// System.out.println(majorname);
 		String sql = "select * from major where majorname = ?";
 		String sql1 = "select * from title where titlename = ?";
 		PreparedStatement ps = db.getPs(sql);

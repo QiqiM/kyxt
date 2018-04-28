@@ -17,7 +17,7 @@ import db.Db;
 /**
  * Servlet implementation class IdVerify
  */
-@WebServlet("/IdVerify")
+@WebServlet(description = "≤È—ØΩÃ ¶", urlPatterns = { "/IdVerify" })
 public class IdVerify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

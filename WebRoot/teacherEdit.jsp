@@ -30,7 +30,7 @@
         <div class="layui-inline">
             <label class="layui-form-label	">教师工号</label>
             <div class="layui-input-block">
-                <input name="empnum" lay-verify="required" id="empnum"  placeholder="请输入" autocomplete="off" class="layui-input" type="text">
+                <input name="empnum" lay-verify="required|empnum" id="empnum"  placeholder="请输入" autocomplete="off" class="layui-input" type="text">
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">教师姓名</label>
             <div class="layui-input-block">
-                <input name="name" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" type="text">
+                <input name="name" id="name" lay-verify="required|name" placeholder="请输入" autocomplete="off" class="layui-input" type="text">
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">电话号码</label>
             <div class="layui-input-block">
-                <input name="telephone" id="telephone"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" type="text">
+                <input name="telephone" id="telephone"  lay-verify="required|telephone" placeholder="请输入" autocomplete="off" class="layui-input" type="text">
             </div>
         </div>
     </div>
@@ -120,14 +120,16 @@
             ,laydate = layui.laydate;
             
             $("#renderselect").click(function() {	
-				form.render('radio');
+				
 				form.render("select");
+				form.render('radio');
 			}); 
 
         //日期
-        
+       	date=new Date();
         laydate.render({
-            elem: '#date1'
+            elem: '#date1',
+            max:'date'
         });
 
         //创建一个编辑器
@@ -135,15 +137,26 @@
 
         //自定义验证规则
         form.verify({
-            title: function(value){
-                if(value.length < 5){
-                    return '标题至少得5个字符啊';
+            //教师工号验证
+            empnum: function(value){
+                if(!(/^\d{6}$/.test(value))){
+                	return '请输入6位由数字组成的教师工号';
                 }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,content: function(value){
-                layedit.sync(editIndex);
-            }
+            },
+            //教师姓名验证
+            name: function(value){
+            	if(!(/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/.test(value))){
+            		return '请输入正确的中文名';	
+            	}
+            },
+            
+            //电话号码验证的两种形式
+            //telephone: [/^1[2|3|4|5|7|8]\d{9}$/, '手机必须11位，只能是数字！']  
+         	telephone:function(value){ 
+  			   if(!(/^1[34578]\d{9}$/.test(value))){  
+        			return '请输入正确格式的手机号！'; 
+    			} 
+			}
         });
 
         //监听指定开关
@@ -161,7 +174,7 @@
           		function(data){
           			if(data == "1")
           			{
-          				layer.msg("教师号重复", {
+          				layer.msg("教师号已存在", {
 									icon: 2,
 									time: 2000 //2秒关闭（如果不配置，默认是3秒）
 								});

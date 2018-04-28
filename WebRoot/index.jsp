@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h1>Login</h1>
 			<form class="layui-form">
 				<div class="layui-form-item">
-					<input class="layui-input" name="username" placeholder="用户名" lay-verify="required" type="text" autocomplete="off">
+					<input class="layui-input" name="username" placeholder="用户名" lay-verify="required|username" type="text" autocomplete="off">
 				</div>
 				<div class="layui-form-item">
 					<input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password" autocomplete="off">
@@ -75,10 +75,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 		//一般直接写在一个js文件中
 		//Demo
+	
+		
 		layui.use(['form', 'layer'], function() {
 			var form = layui.form;
 			var layer = layui.layer;
+			
+			//表单验证
+		form.verify({  
+        username: function(value){  
+          if(value.length < 4 || value.length > 8){  
+            return '请输入4-8个字符的账号';  
+          }
+          if(/^[0-9]*$/.test(value)){
+          	
+          }else{
+          	return '请不要输入非数字的字符';
+          }
+        }  
 
+  		});
+			
 			//监听提交
 			form.on('submit(login)', function(data) {
 
@@ -92,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							if(data.msg == 1) {
 								window.location.href = "adminMain.jsp";
 							} else if(data.msg == 2) {
-								window.location.href = "main.jsp";
+								window.location.href = "teacherMain.jsp";
 							}
 						} else {
 							layer.alert(data.msg, {

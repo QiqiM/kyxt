@@ -12,7 +12,7 @@
 	</head>
 
 	<body>
-		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo">
+		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" lay-shrink="all">
 			<li class="layui-nav-item layui-nav-itemed">
 				<a href="javascript:;">首页</a>
 				<dl class="layui-nav-child">
@@ -25,27 +25,50 @@
 				</dl>
 			</li>
 			<li class="layui-nav-item">
+				<a href="javascript:;">基本信息维护</a>
+				<dl class="layui-nav-child" >
+					<dd>
+						<a href="major/majorQuery.jsp" target="content-show">专业信息维护</a>
+					</dd>
+					<dd>
+						<a href="title/titleQuery.jsp" target="content-show">职称信息维护</a>
+					</dd>
+					<dd>
+						<a href="subpart/subpartQuery.jsp" target="content-show">学科分类信息</a>
+					</dd>
+					<dd>
+						<a href="firstsub/fsQuery.jsp" target="content-show">一级学科信息</a>
+					</dd>
+					<dd>
+						<a href="projectsource/projectsourceQuery.jsp" target="content-show">项目来源信息</a>
+					</dd>
+					
+					<dd>
+						<a href="journal/jourQuery.jsp" target="content-show">期刊信息</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
 				<a href="javascript:;">教师管理</a>
-				<dl class="layui-nav-child">
+				<dl class="layui-nav-child" >
 					<dd>
 						<a href="teacherAdd.jsp" target="content-show">教师信息添加</a>
 					</dd>
 					<dd>
 						<a href="teacherQuery.jsp" target="content-show">教师信息查询</a>
 					</dd>
-					<dd>
-						<a href="">教师信息修改</a>
-					</dd>
-					<dd>
-						<a href="">教师信息删除</a>
-					</dd>
 				</dl>
 			</li>
 			<li class="layui-nav-item">
-				<a href="">云市场</a>
-			</li>
-			<li class="layui-nav-item">
-				<a href="">社区</a>
+				<a href="javascript:;">论文管理</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="teacherAdd.jsp" target="content-show">论文查询</a>
+					</dd>
+					<dd>
+						<a href="teacherQuery.jsp" target="content-show">论文审核</a>
+					</dd>
+				</dl>
 			</li>
 		</ul>
 		<script src="layui/layui.js" charset="utf-8"></script>

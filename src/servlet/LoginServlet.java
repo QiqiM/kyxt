@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		JSONObject json = GetReader.receivePost(request);
-		String username = json.getString("username");
+		int username = json.getInt("username");
 		String password = json.getString("password");
 		String access = json.getString("access"); // 身份标志
 
@@ -54,12 +54,12 @@ public class LoginServlet extends HttpServlet {
 			sql = "select * from admin where account= ?";
 			ps = db.getPs(sql); // 预处理
 			try {
-				ps.setString(1, username);
+				ps.setInt(1, username);
 				rs = ps.executeQuery();
 				if (rs.next()) {
 					if (password.equals(rs.getString("password"))) {
 						resdata = "{\"success\": \"true\", \"msg\": \"1\"}";
-						session.setAttribute("username", username);
+						session.setAttribute("username", rs.getString("name"));
 						session.setAttribute("access", access);
 					} else {
 						resdata = "{\"success\": \"false\", \"msg\": \"管理员密码错误\"}";
@@ -79,7 +79,7 @@ public class LoginServlet extends HttpServlet {
 			sql = "select * from teacher where empNum= ?";
 			ps = db.getPs(sql);
 			try {
-				ps.setString(1, username);
+				ps.setInt(1, username);
 				rs = ps.executeQuery();
 				if (rs.next()) {
 					if (password.equals(rs.getString("password"))) {

@@ -54,6 +54,7 @@ public class EditTeacher extends HttpServlet {
 		JSONObject json = GetReader.receivePost(request);
 		int id = Integer.parseInt(json.getString("id"));
 		int empnum = Integer.parseInt(json.getString("empnum"));
+		// System.out.println("empnum:" + empnum);
 		String name = json.getString("name");
 		String sex = json.getString("sex");
 		String telephone = json.getString("telephone");
@@ -66,7 +67,7 @@ public class EditTeacher extends HttpServlet {
 			sql = "select * from teacher where empnum = ?";
 			ps = db.getPs(sql);
 			try {
-				ps.setInt(1, id);
+				ps.setInt(1, empnum);
 				ResultSet rs = ps.executeQuery();
 				if (rs.next()) {
 					out.print("1"); // 1 代表教师工号重复
@@ -75,22 +76,27 @@ public class EditTeacher extends HttpServlet {
 					rs.close();
 					sql = "update teacher set empnum = ?,name = ?,sex = ?,telephone = ?, birthday = ?,majorid = ?,titleid = ? where empnum = ?";
 					ps = db.getPs(sql);
-					ps.setInt(1, empnum);
-					ps.setString(2, name);
-					ps.setString(3, sex);
-					ps.setString(4, telephone);
-					ps.setString(5, birthday);
-					ps.setInt(6, majorid);
-					ps.setInt(7, titleid);
-					ps.setInt(8, empnum);
-					int row = ps.executeUpdate();
-					if (row > 0) {
-						out.print("2"); // 2代表编辑修改成功
-					} else {
-						out.print("3"); // 3代表编辑修改失败
+					try {
+						ps.setInt(1, empnum);
+						ps.setString(2, name);
+						ps.setString(3, sex);
+						ps.setString(4, telephone);
+						ps.setString(5, birthday);
+						ps.setInt(6, majorid);
+						ps.setInt(7, titleid);
+						ps.setInt(8, id);
+						int row = ps.executeUpdate();
+						if (row > 0) {
+							out.print("2"); // 2代表编辑修改成功
+						} else {
+							out.print("3"); // 3代表编辑修改失败
+						}
+						ps.close();
+						db.getConnect().close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					ps.close();
-					db.getConnect().close();
 
 				}
 			} catch (SQLException e) {

@@ -36,7 +36,7 @@ body{
 </style>
  
  <body>
-    <div style="background-color: #1c5a99;width:100%">
+    <div style="background-color:#086691;width:100%">
     	<div id="bottom">
     		<div id="bottomContent" >
     		<span id="text">

@@ -18,11 +18,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="layui-inline">
 					<label class="layui-form-label">教师工号</label>
 					<div class="layui-input-inline">
-						<input id="empnum" name="empnum" autocomplete="off" class="layui-input" type="text">
+						<input id="empnum" name="empnum" autocomplete="off" lay-verify="empnum" class="layui-input" type="text">
 					</div>
 					<label class="layui-form-label">教师姓名</label>
 					<div class="layui-input-inline">
-						<input id="name" name="name" autocomplete="off" class="layui-input" type="text">
+						<input id="name" name="name" autocomplete="off" lay-verify="name" class="layui-input" type="text">
 					</div>
 				</div>
 			</div>
@@ -60,6 +60,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
+		
+		<script type="text/html" id="nameTpl">
+  			<a href="teacherAdd.jsp" class="layui-table-link" target="content-show">{{ d.name }}</a>
+		</script>
+		<script type="text/html" id="sexTpl">
+  			{{#  if(d.sex === '女'){ }}
+    		<span style="color: #F581B1;">{{ d.sex }}</span>
+ 			 {{#  } else { }}
+    		<span style="color: #00c0ff;">{{ d.sex }}</span>
+  			{{#  } }}
+		</script>
 
 		<script src="layui/layui.js" charset="utf-8"></script>
 		<script src="jquery/jquery-3.2.1.min.js"></script>
@@ -68,7 +79,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var form = layui.form;
 				var table = layui.table;
 				var layer = layui.layer;
-
+				
+				
+				//自定义验证规则
+        	form.verify({
+            //教师工号验证
+            empnum: function(value){
+                if(!(/^\d{0,6}$/.test(value))){
+                	return '请输入1-6位由数字组成的教师工号';
+                }
+            },
+            //教师姓名验证
+            name: function(value){
+            	if(!(/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{0,20}$/.test(value))){
+            		return '请输入正确的中文名';	
+            	}
+            }
+        });
+				
 				//第一个表格实例
 				var tableIns = table.render({
 					elem: '#demo',
@@ -99,10 +127,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								sort: true
 							}, {
 								field: 'name',
-								title: '教师姓名'
+								title: '教师姓名',
+								templet: '#nameTpl'
 							}, {
 								field: 'sex',
-								title: '性别'
+								title: '性别',
+								templet: '#sexTpl'
 							},
 							{
 								field: 'majorname',
@@ -112,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								title: '职称'
 							}, {
 								field: 'birthday',
-								title: '生日'
+								title: '出生日期'
 							}, {
 								field: 'telephone',
 								title: '电话号码'
@@ -186,9 +216,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								majorid = data.majorid;
 								titleid = data.titleid;
 							});
-							
-							 
-							
+								
 							
 						layer.open({
 							type: 2,
@@ -205,13 +233,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								body.contents().find("#empnum").val(data.empnum);
 								body.contents().find("#name").val(data.name);
 								//body.contents().find("#sex").val(data.sex);
-								body.contents().find("input:radio[value='"+data.sex+"']").attr('checked','true'); //设置radio的值
+								
 								body.contents().find("#telephone").val(data.telephone);
 								body.contents().find("#date1").val(data.birthday);
-								body.contents().find("#majorid").val(majorid);
-								body.contents().find("#titleid").val(titleid);					
-								body.contents().find("#renderselect").click();
-								//form.render();
+								
+								 function d()
+                				{
+                					body.contents().find("input:radio[value='"+data.sex+"']").attr('checked','true'); //设置radio的值
+                					body.contents().find("#majorid").val(majorid);
+									body.contents().find("#titleid").val(titleid);
+               						body.contents().find("#renderselect").click();
+               
+                				}
+                				setTimeout(d,100);
 							},
 							end: function() {
 								tableIns.reload({
@@ -225,16 +259,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								})
 
 							}
-						});
-					
-					
-					
-					}
-				
-				
-				
-				
-				
+						});				
+					}				
 				});
 				
 				
