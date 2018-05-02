@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form class="layui-form layui-form-pane">
 			<div class="layui-form-item">
 				<div class="layui-inline">
+				    <br>
 					<label class="layui-form-label">教师工号</label>
 					<div class="layui-input-inline">
 						<input id="empnum" name="empnum" autocomplete="off" lay-verify="empnum" class="layui-input" type="text">

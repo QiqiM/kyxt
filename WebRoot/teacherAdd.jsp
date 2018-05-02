@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: yuyaoyao
+  User: yutaotao
   Date: 2018/4/10
   Time: 20:06
   To change this template use File | Settings | File Templates.
@@ -182,7 +182,9 @@
                 					time:2000,  //2秒关闭(如果不配置,默认是3秒)
                 					anim: 5   //动画特效
                 					});
-                		window.location.reload();
+                		setTimeout(function () {
+                           window.location.reload() ;
+                        }, 1000);
           			
           				}else{
           					layer.msg('添加失败!',{

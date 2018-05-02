@@ -17,35 +17,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<body>  	
   	<jsp:include page="top.jsp"/>
   	<div style="width:100%; height: 700px;background-color: #B0CFEB">
-  		 <div class="layui-layout layui-layout-admin">
-  			<div class="layui-header">
-    			<div class="layui-logo">教师界面</div>
-    			<!-- 头部区域（可配合layui已有的水平导航） -->
-    				<ul class="layui-nav layui-layout-left">
-      					<li class="layui-nav-item"><a href="">教师管理</a></li>
-      					<li class="layui-nav-item"><a href="">论文管理</a></li>
-      					<li class="layui-nav-item"><a href="">用户</a></li>
-      					</li>
-    				</ul>
-    <ul class="layui-nav layui-layout-right">
-      <li class="layui-nav-item">
-        <a href="javascript:;">
-           	余涛涛
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="">基本资料</a></dd>
-          <dd><a href="">安全设置</a></dd>
-        </dl>
-      </li>
-      <li class="layui-nav-item"><a href="">退出</a></li>
-    </ul>
-  </div>
-  
- 
-</div>
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="200" height=700px valign="top" style="background-color:#393D49">
+					<iframe height="100%" width="100%" border="0" frameborder="0" src="teacherLeft.html"></iframe>
+				</td>
+				<td valign="top" height="700px" style="background-color:#FFFFFF">
+					<iframe height="100%" id="content-show" name="content-show" width="100%" border="0" frameborder="0" src="adminIndex.jsp"></iframe>
+				</td>
+			</tr>
+		</table>
 
-  
-  	</div>
+	</div>
 
   	<jsp:include page="foot.jsp"/>
   	

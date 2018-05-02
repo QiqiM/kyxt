@@ -98,6 +98,7 @@ public class AddTeacher extends HttpServlet {
 				}
 
 			}
+
 			out.print(res);
 			out.flush();
 			out.close();

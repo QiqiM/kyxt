@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet {
 						resdata = "{\"success\": \"true\", \"msg\": \"1\"}";
 						session.setAttribute("username", rs.getString("name"));
 						session.setAttribute("access", access);
+						session.setAttribute("id", rs.getInt("account"));
 					} else {
 						resdata = "{\"success\": \"false\", \"msg\": \"管理员密码错误\"}";
 					}
@@ -85,6 +86,7 @@ public class LoginServlet extends HttpServlet {
 					if (password.equals(rs.getString("password"))) {
 						session.setAttribute("username", rs.getString("name"));
 						session.setAttribute("access", access);
+						session.setAttribute("id", rs.getInt("empnum"));
 						resdata = "{\"success\": \"true\", \"msg\": \"2\"}";
 					} else {
 						resdata = "{\"success\": \"false\", \"msg\": \"教师密码错误\"}";
