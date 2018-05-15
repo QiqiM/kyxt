@@ -169,7 +169,7 @@
 
                //监听提交
         form.on('submit(demo1)', function(data){
-          	$.post("PaperEdit",
+          	$.post("EditTeacher",
           		JSON.stringify(data.field),
           		function(data){
           			if(data == "1")

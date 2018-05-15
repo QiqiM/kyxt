@@ -21,6 +21,15 @@ public class QueryPaper {
 	private int prosourceid;
 	private String pubpartname;
 	private int teacherid;
+	private String fileurl;
+
+	public String getFileurl() {
+		return fileurl;
+	}
+
+	public void setFileurl(String fileurl) {
+		this.fileurl = fileurl;
+	}
 
 	public int getTeacherid() {
 		return teacherid;

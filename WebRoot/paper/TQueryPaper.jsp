@@ -119,12 +119,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<table id="demo" lay-filter="demo"></table>
 
 		<script type="text/html" id="barDemo">
-			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+			{{# if(d.auditflag != "审核通过"){ }}
+				<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+			{{# }  }}
 		</script>
 		
 		<script type="text/html" id="titleTpl">
-  			<a href="teacherAdd.jsp" class="layui-table-link" target="content-show">{{ d.title }}</a>
+  			<a href="paper/paperinfo.jsp?paperid={{ d.paperid }}" class="layui-table-link" target="content-show">{{ d.title }}</a>
 		</script>
 		<script type="text/html" id="auditTpl">
   			{{#  if(d.auditflag === '未审核'){ }}
@@ -270,16 +272,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							function(index) {
 								layer.close(index);  //关闭当前确认框
 								$.ajax({
-									url: "QueryTeacher",
+									url: "PaperQueryT",
 									type: "post",
 									dataType: 'json',
 									data: {
-										"empnum": data.empnum,
+										"paperid": data.paperid,
 										"methodname": "deletesingle"
 									},
 									success: function(data) {
 										if(data=="1") {
-
 											layer.msg('删除成功', {
 												icon: 6,
 												time: 1000 //2秒关闭（如果不配置，默认是3秒）
@@ -297,7 +298,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 						layer.open({
 							type: 2,
-							title: '修改教师信息',
+							title: '修改论文信息',
 							shade: 0,
 							area: ['700', '600'],
 							maxmin: true, //最大化，最小化

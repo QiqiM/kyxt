@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<iframe height="100%" width="100%" border="0" frameborder="0" src="teacherLeft.html"></iframe>
 				</td>
 				<td valign="top" height="700px" style="background-color:#FFFFFF">
-					<iframe height="100%" id="content-show" name="content-show" width="100%" border="0" frameborder="0" src="adminIndex.jsp"></iframe>
+					<iframe height="100%" id="content-show" name="content-show" width="100%" border="0" frameborder="0" src="teacherinfo.jsp"></iframe>
 				</td>
 			</tr>
 		</table>

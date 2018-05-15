@@ -77,7 +77,7 @@ public class SubPartEdit extends HttpServlet {
 						ps.setInt(3, oldid);
 						int row = ps.executeUpdate();
 						if (row > 0) {
-							out.print("2"); // 2代表编辑修改成功
+							out.print(""); // 2代表编辑修改成功
 						} else {
 							out.print("3"); // 3代表编辑修改失败
 						}

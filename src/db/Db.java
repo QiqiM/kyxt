@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class Db {
 	private String dbDriver = "com.mysql.jdbc.Driver";
-	private String ConnStr = "jdbc:mysql://localhost:3306/keyan?useUnicode=true&characterEncoding=UTF-8";
+	private String ConnStr = "jdbc:mysql://localhost:3306/keyan?useUnicode=true&characterEncoding=UTF-8&useSSL=true";
 	public Connection connect = null;
 	public ResultSet rs = null;
 

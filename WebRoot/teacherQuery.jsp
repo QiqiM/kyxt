@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</script>
 		
 		<script type="text/html" id="nameTpl">
-  			<a href="teacherAdd.jsp" class="layui-table-link" target="content-show">{{ d.name }}</a>
+  			<a href="ASeeTinfo.jsp?tid={{d.empnum}}" class="layui-table-link" target="content-show">{{ d.name }}</a>
 		</script>
 		<script type="text/html" id="sexTpl">
   			{{#  if(d.sex === '女'){ }}
@@ -129,7 +129,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							}, {
 								field: 'name',
 								title: '教师姓名',
-								templet: '#nameTpl'
+								templet: '#nameTpl',
+								event: 'passid',
+								style: 'cursor: pointer'
 							}, {
 								field: 'sex',
 								title: '性别',
@@ -263,6 +265,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						});				
 					}				
 				});
+				
+						
 				
 				
 				//多行删除

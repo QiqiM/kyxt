@@ -135,7 +135,7 @@ public class Journal extends HttpServlet {
 			}
 
 		} else {
-			sql = "select * from firstsub where pubpartid = ?";
+			sql = "select * from journal where pubpartid = ?";
 			PreparedStatement ps = db.getPs(sql);
 			try {
 				ps.setInt(1, pubpartid);

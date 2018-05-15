@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+@charset "utf-8";
+
+/* CSS Document */
+
+html {
+	height: 100%
+}
+
+body {
+	background: url(../images/pwdbg.jpg) no-repeat center top;
+	background-size: 100% 100%
+}
+
+
+.login {
+	height: 340px;
+	width: 360px;
+	padding: 20px;
+	background-color: #BFD5D7;
+	border-radius: 4px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -240px 0 0 -200px;
+	z-index: 6666;
+	opacity: 0.6;
+}
+
+.login h1 {
+	text-align: center;
+	color: #fff;
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+

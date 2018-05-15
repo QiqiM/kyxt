@@ -74,6 +74,7 @@ public class PaperQueryT extends HttpServlet {
 		String json = "";
 		int numbers = 0;
 		Db db = new Db();
+		int tid = (int) request.getSession().getAttribute("id");
 		String title = request.getParameter("title");
 		String pubtime = request.getParameter("pubtime");
 		String firstauthor = request.getParameter("firstauthor");
@@ -90,68 +91,68 @@ public class PaperQueryT extends HttpServlet {
 		int page = Integer.parseInt(request.getParameter("page"));
 		int offset = limit * (page - 1);
 		String sql = ""; // 查询总数据的最终sql拼接语句
-		String sqlf = "select * from TeacherQueryPaper where 1=1 "; // sql头部
-																	// 分页查询
+		String sqlf = "select * from TeacherQueryPaper where teacherid = " + tid; // sql头部
+		// 分页查询
 		String sqle = " limit " + offset + "," + limit + ""; // sql尾部
-		String sql1 = "select count(*) numbers from TeacherQueryPaper where 1=1 "; // 得到count值，总结果值
+		String sql1 = "select count(*) numbers from TeacherQueryPaper where teacherid = " + tid; // 得到count值，总结果值
 		String str = "";
 		if (title == "" || title == null) {
 
 		} else {
-			str = str + "and title like '%" + title + "%'";
+			str = str + " and title like '%" + title + "%'";
 		}
 
 		if (firstauthor == "" || firstauthor == null) {
 
 		} else {
-			str = str + "and firstauthor like '%" + firstauthor + "%'";
+			str = str + " and firstauthor like '%" + firstauthor + "%'";
 		}
 
 		if (subtypeid == "" || subtypeid == null) {
 
 		} else {
-			str = str + "and subtypeid like '%" + subtypeid + "%'";
+			str = str + " and subtypeid like '%" + subtypeid + "%'";
 		}
 
 		if (firstsubid == "" || firstsubid == null) {
 
 		} else {
-			str = str + "and firstsubid like '%" + firstsubid + "%'";
+			str = str + " and firstsubid like '%" + firstsubid + "%'";
 		}
 		if (pubtypeid == "" || pubtypeid == null) {
 
 		} else {
-			str = str + "and pubtypeid like '%" + pubtypeid + "%'";
+			str = str + " and pubtypeid like '%" + pubtypeid + "%'";
 		}
 		if (prosourceid == "" || prosourceid == null) {
 
 		} else {
-			str = str + "and prosourceid like '%" + prosourceid + "%'";
+			str = str + " and prosourceid like '%" + prosourceid + "%'";
 		}
 		if (pubarea == "" || pubarea == null) {
 
 		} else {
-			str = str + "and pubarea like '%" + pubarea + "%'";
+			str = str + " and pubarea like '%" + pubarea + "%'";
 		}
 		if (pubarea == "" || pubarea == null) {
 
 		} else {
-			str = str + "and pubarea like '%" + pubarea + "%'";
+			str = str + " and pubarea like '%" + pubarea + "%'";
 		}
 		if (journalid == "" || journalid == null) {
 
 		} else {
-			str = str + "and journalid like '%" + journalid + "%'";
+			str = str + " and journalid like '%" + journalid + "%'";
 		}
 		if (layout == "" || layout == null) {
 
 		} else {
-			str = str + "and layout like '%" + layout + "%'";
+			str = str + " and layout like '%" + layout + "%'";
 		}
 		if (auditflag == "" || auditflag == null) {
 
 		} else {
-			str = str + "and auditflag like '%" + auditflag + "%'";
+			str = str + " and auditflag like '%" + auditflag + "%'";
 		}
 
 		if (pubtime == "" || pubtime == null) {
@@ -160,12 +161,11 @@ public class PaperQueryT extends HttpServlet {
 			String[] aa;
 			aa = pubtime.split(" - ");
 			// System.out.println(aa[0] + aa[1]);
-			str = str + "and (pubtime > '" + aa[0] + "' and pubtime < '" + aa[1] + " ')";
+			str = str + " and (pubtime > '" + aa[0] + "' and pubtime < '" + aa[1] + " ')";
 		}
 
 		sql1 = sql1 + str;
 		sql = sqlf + str + sqle;
-		System.out.println(sql);
 		// System.out.println(sql);
 		try {
 			ResultSet rs;
@@ -204,23 +204,23 @@ public class PaperQueryT extends HttpServlet {
 				paper.setPubtime(rs.getDate(4));
 				paper.setPubarea(rs.getString(5));
 				paper.setIstrans(rs.getString(6));
-				paper.setLayout(rs.getString(7));
-				paper.setAuditflag(rs.getString(8));
-				paper.setSourcename(rs.getString(9));
-				paper.setPubpartname(rs.getString(10));
-				paper.setSubpartname(rs.getString(11));
-				paper.setJournalname(rs.getString(12));
-				paper.setFirstsubname(rs.getString(13));
-				paper.setTeacherid(rs.getInt(14));
-				paper.setProsourceid(rs.getInt(15));
-				paper.setFirstsubid(rs.getInt(16));
-				paper.setSubtypeid(rs.getInt(17));
-				paper.setJournalid(rs.getInt(18));
-				paper.setPubtypeid(rs.getInt(19));
 
-				paper.setMajorname(rs.getString(20));
-				paper.setMentorflag(rs.getString(21));
-
+				paper.setAuditflag(rs.getString(7));
+				paper.setSourcename(rs.getString(8));
+				paper.setPubpartname(rs.getString(9));
+				paper.setSubpartname(rs.getString(10));
+				paper.setJournalname(rs.getString(11));
+				paper.setFirstsubname(rs.getString(12));
+				paper.setTeacherid(rs.getInt(13));
+				paper.setProsourceid(rs.getInt(14));
+				paper.setFirstsubid(rs.getInt(15));
+				paper.setSubtypeid(rs.getInt(16));
+				paper.setJournalid(rs.getInt(17));
+				paper.setPubtypeid(rs.getInt(18));
+				paper.setMajorname(rs.getString(19));
+				paper.setMentorflag(rs.getString(20));
+				paper.setLayout(rs.getString(21));
+				paper.setFileurl(rs.getString(22));
 				paperList.add(paper);
 			}
 			qpJson.setData(paperList);
@@ -237,8 +237,32 @@ public class PaperQueryT extends HttpServlet {
 
 	}
 
-	private void deleteSingle(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void deleteSingle(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		Db db = new Db();
+		String sql = "delete from paper where id = ?";
+		int paperid = Integer.parseInt(request.getParameter("paperid"));
+		int row = 0;
+		PreparedStatement ps = db.getPs(sql);
+		try {
+			ps.setInt(1, paperid);
+			row = ps.executeUpdate();
+			if (row != 0) {
+				out.print("1");
+			} else {
+				out.print("0"); // 直接返回只能返回数字，否则要构建json数据
+			}
+			ps.close();
+			db.getConnect().close();
+			out.flush();
+			out.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

@@ -131,7 +131,6 @@ public class SubPartQuery extends HttpServlet {
 			ResultSet rs;
 			PreparedStatement ps;
 			ps = db.getPs(sql);
-			ps = db.getPs(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Item item = new Item();

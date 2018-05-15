@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<hr>
 					<div class="layui-inline">
 
-						<label class="layui-form-label" style="width: 120px ">项目来源编号</label>
+						<label class="layui-form-label" style="width: 120px ">项目名称编号</label>
 						<div class="layui-input-inline">
 							<input id="id" name="id" autocomplete="off" class="layui-input" type="text">
 						</div>
@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								title: '序号'
 							}, {
 								field: 'id',
-								title: '项目来源编号',
+								title: '项目名称编号',
 								sort: true
 							}, {
 								field: 'name',
