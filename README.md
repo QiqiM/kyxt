@@ -16,3 +16,7 @@
           6.Admin完成对论文审核，查询功能
           7.Admin完成对论文信息的分析，生成可视化的图表数据显示到页面（拟采用Echarts实现）
 		  
+系统运行截图：
+登录界面：
+![image](http://github.com/QiqiM/kyxt/raw/master/RunPicture/Login.png)
+
