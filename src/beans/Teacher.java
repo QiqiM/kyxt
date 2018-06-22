@@ -2,6 +2,7 @@ package beans;
 
 import java.sql.Date;
 
+//添加教师使用的bean
 public class Teacher {
 
 	public Teacher() {

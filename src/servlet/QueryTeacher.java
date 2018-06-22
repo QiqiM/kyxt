@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import beans.ResJson;
 import beans.TeacherQ;
-import beans.TeacherQJson;
 import db.Db;
 
 /**
@@ -140,10 +140,10 @@ public class QueryTeacher extends HttpServlet {
 		}
 
 		List<TeacherQ> teacherList = new ArrayList<TeacherQ>();
-		TeacherQJson teacherJson = new TeacherQJson();
-		teacherJson.setCode(0);
-		teacherJson.setCount(numbers);
-		teacherJson.setMsg("");
+		ResJson resjson = new ResJson();
+		resjson.setCode(0);
+		resjson.setCount(numbers);
+		resjson.setMsg("");
 
 		try {
 			ResultSet rs;
@@ -162,8 +162,8 @@ public class QueryTeacher extends HttpServlet {
 				teacherQ.setTelephone(rs.getString(7));
 				teacherList.add(teacherQ);
 			}
-			teacherJson.setData(teacherList);
-			json = gson.toJson(teacherJson);
+			resjson.setData(teacherList);
+			json = gson.toJson(resjson);
 			// System.out.println(json);
 			rs.close();
 			ps.close();
@@ -183,25 +183,34 @@ public class QueryTeacher extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Db db = new Db();
 		String sql = "delete from teacher where empnum = ?";
-		int empnum = Integer.parseInt(request.getParameter("empnum"));
-		int row = 0;
-		PreparedStatement ps = db.getPs(sql);
+		int empnum = Integer.parseInt(request.getParameter("empnum")); // 获取要删除的教师的id(empNum)
+		String sql1 = "select * from paper where teacherid = ?";
+		PreparedStatement ps = db.getPs(sql1);
 		try {
 			ps.setInt(1, empnum);
-			row = ps.executeUpdate();
-			if (row != 0) {
-				out.print("1");
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				out.print("404"); // 不能删除，有数据
 			} else {
-				out.print("0"); // 直接返回只能返回数字，否则要构建json数据
+				int row = 0;
+				ps = db.getPs(sql);
+				ps.setInt(1, empnum);
+				row = ps.executeUpdate();
+				if (row != 0) {
+					out.print("1"); // 删除成功
+				} else {
+					out.print("0"); // 直接返回只能返回数字，否则要构建json数据
+				}
+				ps.close();
+				db.getConnect().close();
+				out.flush();
+				out.close();
 			}
-			ps.close();
-			db.getConnect().close();
-			out.flush();
-			out.close();
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+
 	}
 
 	private void deleteMulti(HttpServletRequest request, HttpServletResponse response) throws IOException {

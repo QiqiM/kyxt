@@ -86,13 +86,20 @@ public class EditTeacher extends HttpServlet {
 						ps.setInt(7, titleid);
 						ps.setInt(8, id);
 						int row = ps.executeUpdate();
-						if (row > 0) {
+						ps.close();
+						// db.getConnect().close();
+						String sql1 = "update paper set firstauthor = ? where teacherid = ? and mentorflag = '否'";
+						PreparedStatement ps1 = db.getPs(sql1);
+						ps1.setString(1, name);
+						ps1.setInt(2, empnum);
+						int row1 = ps1.executeUpdate();
+						ps1.close();
+						db.getConnect().close();
+						if (row > 0 && row1 > 0) {
 							out.print("2"); // 2代表编辑修改成功
 						} else {
 							out.print("3"); // 3代表编辑修改失败
 						}
-						ps.close();
-						db.getConnect().close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -117,13 +124,21 @@ public class EditTeacher extends HttpServlet {
 				ps.setInt(7, titleid);
 				ps.setInt(8, empnum);
 				int row = ps.executeUpdate();
-				if (row > 0) {
+
+				ps.close();
+				// db.getConnect().close();
+				String sql1 = "update paper set firstauthor = ? where teacherid = ? and mentorflag = '否'";
+				PreparedStatement ps1 = db.getPs(sql1);
+				ps1.setString(1, name);
+				ps1.setInt(2, empnum);
+				int row1 = ps1.executeUpdate();
+				ps1.close();
+				db.getConnect().close();
+				if (row > 0 && row1 > 0) {
 					out.print("2"); // 2代表编辑修改成功
 				} else {
 					out.print("3"); // 3代表编辑修改失败
 				}
-				ps.close();
-				db.getConnect().close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

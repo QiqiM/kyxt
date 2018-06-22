@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+#bg {
+	width: 1366px;
+	height: 640px;
+	background: url(../images/keji.jpg);
+	z-index: 10;
+	background-repeat: no-repeat;
+	background-size: 1366px 645px;
+	background-attachment: fixed;
+	overfolw: hidden;
+	position: relative;
+}
+
+#syname {
+	margin: 60px 420px;
+	padding: 20px 20px;
+	position: absolute;
+	color: #FFEE4C
+}
+
+#layout {
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	top: 50%;
+	left: 50%;
+	background-color: #010C1F;
+	z-index: 11;
+	opacity: 0.5;
+	margin: -150px 0 0 -200px
+}
+
+.fcolor {
+	color: #FFEE4C;
+	font-size: 14px;
+}
+
+#inner-box {
+	text-align: center;
+	margin-top: 40px;
+	margin-right: 65px;
+}

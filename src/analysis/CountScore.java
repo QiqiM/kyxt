@@ -168,7 +168,8 @@ public class CountScore extends HttpServlet {
 					ps1.close();
 				}
 
-				System.out.println("a:" + grade1 + " b:" + grade2 + " c:" + grade3);
+				// System.out.println("a:" + grade1 + " b:" + grade2 + " c:" +
+				// grade3);
 
 				grade1 = grade1 * num1; // 计算每个等级的得分
 				grade2 = grade2 * num2;
@@ -176,7 +177,8 @@ public class CountScore extends HttpServlet {
 
 				int lastgrade = grade1 + grade2 + grade3;
 
-				System.out.println("a:" + grade1 + " b:" + grade2 + " c:" + grade3);
+				// System.out.println("a:" + grade1 + " b:" + grade2 + " c:" +
+				// grade3);
 
 				score.setTopgrade(grade1);
 				score.setOnegrade(grade2);

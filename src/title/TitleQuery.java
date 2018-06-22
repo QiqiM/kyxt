@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import beans.Item;
-import beans.ItemJson;
+import beans.ResJson;
 import db.Db;
 
 /**
@@ -125,10 +125,10 @@ public class TitleQuery extends HttpServlet {
 		}
 
 		List<Item> ItemList = new ArrayList<Item>();
-		ItemJson ItemJson = new ItemJson();
-		ItemJson.setCode(0);
-		ItemJson.setCount(numbers);
-		ItemJson.setMsg("");
+		ResJson resjson = new ResJson();
+		resjson.setCode(0);
+		resjson.setCount(numbers);
+		resjson.setMsg("");
 
 		try {
 			ResultSet rs;
@@ -143,8 +143,8 @@ public class TitleQuery extends HttpServlet {
 
 				ItemList.add(item);
 			}
-			ItemJson.setData(ItemList);
-			json = gson.toJson(ItemJson);
+			resjson.setData(ItemList);
+			json = gson.toJson(resjson);
 			// System.out.println(json);
 			rs.close();
 			ps.close();
@@ -164,8 +164,42 @@ public class TitleQuery extends HttpServlet {
 
 	}
 
-	private void deletesingle(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void deletesingle(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		Db db = new Db();
+		String sql = "delete from title where id = ?";
+		int id = Integer.parseInt(request.getParameter("id")); // 获取要删除职称的id
+		String sql1 = "select * from teacher where titleid = ?";
+		PreparedStatement ps = db.getPs(sql1);
+		try {
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				out.print("404"); // 不能删除，有数据
+
+			} else {
+				int row = 0;
+				ps = db.getPs(sql);
+				ps.setInt(1, id);
+				row = ps.executeUpdate();
+				if (row != 0) {
+					out.print("1"); // 删除成功
+				} else {
+					out.print("0"); // 直接返回只能返回数字，否则要构建json数据
+				}
+
+			}
+			ps.close();
+			db.getConnect().close();
+			out.flush();
+			out.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	}
 

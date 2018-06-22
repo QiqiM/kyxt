@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+
+
+/* CSS Document */
+
+html {
+	height: 100%
+}
+
+body {
+	background: url(../images/pwdbg1.jpg) no-repeat center top;
+	background-size: 100% 100%
+}
+
+
+#out-box {
+	height: 200px;
+	width: 960px;
+	padding: 20px;
+	background-color: #DCDDDF;
+	border-radius: 10px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -320px 0 0 -500px;
+	z-index: 6666;
+	opacity: 0.4;
+}
+
+.show{
+	line-height:200%;
+	margin-left:30px
+	
+}
+
+a{  
+    cursor:pointer;  
+    text-decoration:none;  
+    color:#CE0221;
+    hide-focus: expression(this.hideFocus=true);  
+    outline:none;  
+}  
+a:link,a:visited,a:hover,a:active{  
+    text-decoration:none;  
+    
+    
+}  
+  
+a:focus{  
+    outline:0;   
+    
+}  
+
+
+
+

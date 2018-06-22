@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import beans.ResJson;
 import db.Db;
 
 /**
@@ -65,8 +66,42 @@ public class PubQuery extends HttpServlet {
 		}
 	}
 
-	private void deletesingle(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void deletesingle(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		Db db = new Db();
+		String sql = "delete from pubpart where id = ?";
+		int id = Integer.parseInt(request.getParameter("id")); // 获取要删除的项目来源的id(empNum)
+		String sql1 = "select id from paper where pubtypeid = ?  UNION select id from journal where pubpartid = ?";
+		PreparedStatement ps = db.getPs(sql1);
+		try {
+			ps.setInt(1, id);
+			ps.setInt(2, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				out.print("404"); // 不能删除，有数据
+			} else {
+				int row = 0;
+				ps = db.getPs(sql);
+				ps.setInt(1, id);
+				row = ps.executeUpdate();
+				if (row != 0) {
+					out.print("1"); // 删除成功
+				} else {
+					out.print("0"); // 直接返回只能返回数字，否则要构建json数据
+				}
+				ps.close();
+				db.getConnect().close();
+
+			}
+			out.flush();
+			out.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	}
 
@@ -125,10 +160,10 @@ public class PubQuery extends HttpServlet {
 		}
 
 		List<PubBean> PubList = new ArrayList<PubBean>();
-		PubJson pubjson = new PubJson();
-		pubjson.setCode(0);
-		pubjson.setCount(numbers);
-		pubjson.setMsg("");
+		ResJson resjson = new ResJson();
+		resjson.setCode(0);
+		resjson.setCount(numbers);
+		resjson.setMsg("");
 
 		try {
 			ResultSet rs;
@@ -143,8 +178,8 @@ public class PubQuery extends HttpServlet {
 
 				PubList.add(pubbean);
 			}
-			pubjson.setData(PubList);
-			json = gson.toJson(pubjson);
+			resjson.setData(PubList);
+			json = gson.toJson(resjson);
 			// System.out.println(json);
 			rs.close();
 			ps.close();

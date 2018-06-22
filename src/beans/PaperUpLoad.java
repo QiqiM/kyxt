@@ -59,6 +59,7 @@ public class PaperUpLoad extends HttpServlet {
 
 		// request.getSession().getServletContext().getRealPath("/WEB-INF/uploadFile")
 		String savePath = "G:\\MyJava\\yttweb\\WebRoot\\WEB-INF\\uploadFile";
+		// String savePath = "F:\\uploadFile";
 		// 获取上传的文件集合
 		Collection<Part> parts = request.getParts();
 		// 上传单个文件

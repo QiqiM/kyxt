@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import beans.ResJson;
 import db.Db;
 
 /**
@@ -185,10 +186,10 @@ public class PaperQueryT extends HttpServlet {
 		}
 
 		List<QueryPaper> paperList = new ArrayList<QueryPaper>();
-		QPJson qpJson = new QPJson();
-		qpJson.setCode(0);
-		qpJson.setCount(numbers);
-		qpJson.setMsg("");
+		ResJson resjson = new ResJson();
+		resjson.setCode(0);
+		resjson.setCount(numbers);
+		resjson.setMsg("");
 
 		try {
 			ResultSet rs;
@@ -223,8 +224,8 @@ public class PaperQueryT extends HttpServlet {
 				paper.setFileurl(rs.getString(22));
 				paperList.add(paper);
 			}
-			qpJson.setData(paperList);
-			json = gson.toJson(qpJson);
+			resjson.setData(paperList);
+			json = gson.toJson(resjson);
 			// System.out.println(json);
 			rs.close();
 			ps.close();

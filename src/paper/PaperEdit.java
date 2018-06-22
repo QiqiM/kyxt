@@ -63,10 +63,10 @@ public class PaperEdit extends HttpServlet {
 		String layout = json.getString("layout");
 		String pubarea = json.getString("pubarea");
 		String istrans = json.getString("istrans");
-
+		String auditflag = "Î´ÉóºË";
 		String sql;
 		PreparedStatement ps;
-		sql = "update paper set title = ?,firstauthor = ?,pubtime = ?,subtypeid = ?, firstsubid = ?,pubtypeid = ?,journalid = ? ,prosourceid= ?,layout= ?,pubarea = ?,istrans= ? where id = ?";
+		sql = "update paper set title = ?,firstauthor = ?,pubtime = ?,subtypeid = ?, firstsubid = ?,pubtypeid = ?,journalid = ? ,prosourceid= ?,layout= ?,pubarea = ?,istrans= ? ,auditflag = ? where id = ?";
 		ps = db.getPs(sql);
 		try {
 			ps.setString(1, title);
@@ -80,7 +80,8 @@ public class PaperEdit extends HttpServlet {
 			ps.setString(9, layout);
 			ps.setString(10, pubarea);
 			ps.setString(11, istrans);
-			ps.setInt(12, paperid);
+			ps.setString(12, auditflag);
+			ps.setInt(13, paperid);
 
 			int row = ps.executeUpdate();
 			if (row > 0) {

@@ -1,7 +1,13 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="tomcat8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.29" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:\Program Files (x86)\Java\jdk1.8.0_144\jre">
     <option name="UPDATING_POLICY" value="restart-server" />
-    <deployment />
+    <deployment>
+      <artifact name="yttweb:Web exploded">
+        <settings>
+          <option name="CONTEXT_PATH" value="/" />
+        </settings>
+      </artifact>
+    </deployment>
     <server-settings>
       <option name="BASE_DIRECTORY_NAME" value="Unnamed_yttweb" />
     </server-settings>
@@ -59,6 +65,10 @@
         <option name="PROGRAM_PARAMETERS" value="" />
       </SHUTDOWN>
     </ConfigurationWrapper>
-    <method />
+    <method>
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="yttweb:Web exploded" />
+      </option>
+    </method>
   </configuration>
 </component>

@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import beans.ResJson;
 import beans.TeacherQ;
-import beans.TeacherQJson;
 import db.Db;
 
 /**
@@ -66,10 +66,10 @@ public class TeacherInfo extends HttpServlet {
 		ps = db.getPs(sql);
 
 		List<TeacherQ> teacherList = new ArrayList<TeacherQ>();
-		TeacherQJson teacherJson = new TeacherQJson();
-		teacherJson.setCode(0);
-		teacherJson.setCount(10);
-		teacherJson.setMsg("");
+		ResJson resjson = new ResJson();
+		resjson.setCode(0);
+		resjson.setCount(0);
+		resjson.setMsg("");
 
 		try {
 			ps.setInt(1, tid);
@@ -86,8 +86,8 @@ public class TeacherInfo extends HttpServlet {
 				teacherList.add(teacherQ);
 
 			}
-			teacherJson.setData(teacherList);
-			json = gson.toJson(teacherJson);
+			resjson.setData(teacherList);
+			json = gson.toJson(resjson);
 
 			rs.close();
 			ps.close();

@@ -1,26 +1,11 @@
 package pubpart;
 
+import beans.Item;
+
 //刊物类型查询所需的bean
-public class PubBean {
-	private int id;
-	private String name;
+public class PubBean extends Item {
+
 	private int grade;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public int getGrade() {
 		return grade;

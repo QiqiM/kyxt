@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import beans.ResJson;
 import db.Db;
 
 /**
@@ -62,10 +63,10 @@ public class AuditQuery extends HttpServlet {
 		// System.out.println(id);
 		String sql = "select * from auditquery where paperid = ? ";
 		List<AuditBean> AuditList = new ArrayList<AuditBean>();
-		ABJson AbJson = new ABJson();
-		AbJson.setCode(0);
-		AbJson.setCount(numbers);
-		AbJson.setMsg("");
+		ResJson resjson = new ResJson();
+		resjson.setCode(0);
+		resjson.setCount(numbers);
+		resjson.setMsg("");
 
 		try {
 			ResultSet rs;
@@ -83,8 +84,8 @@ public class AuditQuery extends HttpServlet {
 
 				AuditList.add(auditBean);
 			}
-			AbJson.setData(AuditList);
-			json = gson.toJson(AbJson);
+			resjson.setData(AuditList);
+			json = gson.toJson(resjson);
 			// System.out.println(json);
 			rs.close();
 			ps.close();

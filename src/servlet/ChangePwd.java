@@ -71,7 +71,6 @@ public class ChangePwd extends HttpServlet {
 				ResultSet rs;
 				rs = ps.executeQuery();
 				if (rs.next()) {
-					System.out.println(rs.getString("password"));
 					if (oldpwd.equals(rs.getString("password"))) {
 
 						if (pwd1.equals(pwd2)) {
