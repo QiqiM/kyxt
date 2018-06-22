@@ -18,6 +18,6 @@
 		  
 系统运行截图：
 登录界面：
-![image](https://github.com/QiqiM/kyxt/raw/master/RunPicture/TeacherQuery.PNG)
+![image](https://github.com/QiqiM/kyxt/blob/master/RunPicture/TeacherQuery.PNG)
 
 
