@@ -19,5 +19,15 @@
 系统运行截图：
 登录界面：
 ![image](https://github.com/QiqiM/kyxt/raw/master/RunPicture/Login.PNG)
+教师查询论文界面：
+![image](https://github.com/QiqiM/kyxt/raw/master/RunPicture/TeacherQuery.PNG)
+图表分析1：
+![image](https://github.com/QiqiM/kyxt/raw/master/RunPicture/chart1.PNG)
+图表分析2：
+![image](https://github.com/QiqiM/kyxt/raw/master/RunPicture/chart2.PNG)
+
+
+
+
 
 
