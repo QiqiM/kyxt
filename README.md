@@ -18,5 +18,6 @@
 		  
 系统运行截图：
 登录界面：
-![image](https://github.com/QiqiM/kyxt/raw/master/RunPicture/Login.png)
+![Alt text](https://github.com/QiqiM/kyxt/raw/master/RunPicture/Login.png)
+
 
